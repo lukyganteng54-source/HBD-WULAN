@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun Shinta!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            font-size: 16px;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: #f0f8ff;
+            overflow-x: hidden;
+            position: relative;
+            background-color: #0d1a2f;
+            background-image: url('https://googleusercontent.com/image_generation_content/0');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .start-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 26, 47, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .start-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #f0f8ff;
+            text-align: center;
+            padding: 0 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .start-image-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            margin-bottom: 2rem;
+            animation: fadeInScale 2s ease-out, border-color-change 10s infinite;
+        }
+        
+        @keyframes border-color-change {
+            0% { border-color: #f0f8ff; }
+            25% { border-color: #ffeb3b; }
+            50% { border-color: #ff6347; }
+            75% { border-color: #8a2be2; }
+            100% { border-color: #f0f8ff; }
+        }
+
+        .start-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .start-button {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #0d1a2f;
+            background-color: #b0c4de;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            margin-top: 1.5rem;
+        }
+
+        .start-button:hover {
+            transform: scale(1.1);
+            background-color: #e0e0e0;
+        }
+
+        .main-content {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            animation: fadeIn 2s ease-in-out;
+            max-width: 90%;
+            position: relative; /* Penting untuk penempatan stiker */
+        }
+
+        /* Gaya Stiker Umum */
+        .birthday-sticker {
+            position: absolute;
+            width: 70px; /* Lebar stiker */
+            height: 70px; /* Tinggi stiker */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3)); /* Efek bayangan */
+            z-index: 15; /* Pastikan di atas konten */
+        }
+
+        /* Stiker Kiri Atas */
+        .sticker-top-left {
+            top: -20px; /* Sesuaikan posisi vertikal */
+            left: -20px; /* Sesuaikan posisi horizontal */
+            background-image: url('https://img.icons8.com/color/96/000000/gift.png'); /* URL Stiker Kiri */
+            transform: rotate(-15deg); /* Sedikit rotasi */
+        }
+
+        /* Stiker Kanan Atas */
+        .sticker-top-right {
+            top: -20px; /* Sesuaikan posisi vertikal */
+            right: -20px; /* Sesuaikan posisi horizontal */
+            background-image: url('https://img.icons8.com/color/96/000000/confetti.png'); /* URL Stiker Kanan (contoh: confetti) */
+            transform: rotate(15deg); /* Rotasi ke arah berlawanan */
+        }
+
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            margin: 0;
+            animation: textFadeIn 3s ease-in-out forwards, colorChange 10s infinite;
+            opacity: 0;
+            animation-delay: 1s;
+            line-height: 1.2;
+        }
+
+        @keyframes colorChange {
+            0% { color: #f0f8ff; }
+            25% { color: #ffeb3b; }
+            50% { color: #ff6347; }
+            75% { color: #8a2be2; }
+            100% { color: #f0f8ff; }
+        }
+
+        .name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            color: #b0c4de;
+            animation: textFadeIn 3s ease-in-out forwards;
+            opacity: 0;
+            animation-delay: 1.5s;
+        }
+
+        .message {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            color: #d3d3d3;
+            animation: textFadeIn 3s ease-in-out forwards;
+            opacity: 0;
+            animation-delay: 2s;
+        }
+
+        .countdown-container {
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            color: #e0e0e0;
+            animation: textFadeIn 3s ease-in-out forwards;
+            opacity: 0;
+            animation-delay: 2.5s;
+        }
+
+        .countdown {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        /* Animasi */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes textFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Dekorasi */
+        .confetti-container, .stars-container, .decorations {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5;
+        }
+        .confetti {
+            position: absolute; background-color: #e6e6fa; border-radius: 50%; animation: confettiFall 10s linear infinite;
+        }
+        @keyframes confettiFall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        .star {
+            position: absolute; background-color: #fff; border-radius: 50%; box-shadow: 0 0 5px #fff, 0 0 10px #fff; animation: blink 2s infinite ease-in-out;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .decorations div {
+            position: absolute; bottom: -150px; animation: riseUp 15s linear infinite; z-index: 9; opacity: 0; transition: opacity 1s ease-in-out;
+        }
+        .balloon { width: 50px; height: 65px; background-color: #b0c4de; border-radius: 50%; box-shadow: inset -5px -5px 0 rgba(0,0,0,0.1); transform: rotate(15deg); }
+        .balloon-1 { left: 5%; animation-delay: 2s; }
+        .balloon-2 { right: 5%; animation-delay: 5s; transform: rotate(-15deg); }
+        .cake { width: 100px; height: 70px; background-color: #a2a2a2; border-radius: 50% / 15px; left: 35%; bottom: -80px; animation-delay: 8s; }
+        .present { width: 80px; height: 60px; background-color: #d3d3d3; position: absolute; right: 15%; animation-delay: 10s; }
+        @keyframes riseUp {
+            from { transform: translateY(0); opacity: 0; }
+            to { transform: translateY(-120vh); opacity: 1; }
+        }
+
+        /* Kembang api roket (naik) */
+        .rocket {
+            position: absolute;
+            width: 5px;
+            height: 20px;
+            background: linear-gradient(to top, transparent, #fff);
+            bottom: 0;
+            animation: rise 2s ease-in-out forwards;
+            z-index: 1;
+        }
+        @keyframes rise {
+            to {
+                transform: translateY(var(--y-pos));
+                opacity: 0;
+            }
+        }
+        
+        /* Kembang api meledak */
+        .spark {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: burst 1s ease-out forwards;
+            z-index: 1;
+        }
+        @keyframes burst {
+            to {
+                transform: translate(var(--x-dir), var(--y-dir));
+                opacity: 0;
+            }
+        }
+
+        /* Bunga api di bawah */
+        .sparkler {
+            position: absolute;
+            bottom: 0;
+            width: 2px;
+            height: 10px;
+            background: radial-gradient(white 0%, yellow 30%, orange 60%, red 100%);
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparklerGlow 1s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+        @keyframes sparklerGlow {
+            0% { opacity: 0.5; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @media (min-width: 768px) {
+            :root { font-size: 16px; }
+            .start-title { font-size: 3rem; }
+            .start-image-container { width: 200px; height: 200px; }
+            .start-button { padding: 1.2rem 2.5rem; font-size: 1.2rem; }
+            .content { padding: 30px 50px; max-width: 80%; }
+            .title { font-size: 8rem; }
+            .name { font-size: 2rem; margin-top: -10px; }
+            .message { font-size: 1.5rem; }
+            .countdown-container { font-size: 1.2rem; }
+            .countdown { font-size: 2rem; }
+            .balloon { width: 80px; height: 100px; }
+            .balloon-1 { left: 10%; }
+            .balloon-2 { right: 10%; }
+            .cake { width: 150px; height: 100px; left: 40%; }
+            .present { width: 120px; height: 100px; right: 20%; }
+            /* Penyesuaian stiker untuk desktop */
+            .birthday-sticker {
+                width: 90px;
+                height: 90px;
+            }
+            .sticker-top-left { top: -30px; left: -30px; }
+            .sticker-top-right { top: -30px; right: -30px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="startScreen" class="start-screen">
+        <audio id="backgroundMusic" loop autoplay>
+            <source src="lagu.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="fireworks-container" id="fireworksContainer"></div>
+        <div class="sparklers-container" id="sparklersContainer"></div> 
+
+        <h2 class="start-title">Klik untuk Memulai Perayaan Shinta!</h2>
+        <div class="start-image-container">
+            <img src="foto1.jpg" alt="foto1.jpg">
+        </div>
+        <button id="startButton" class="start-button">Mulai!</button>
+    </div>
+
+    <div id="mainContent" class="main-content">
+        <audio id="trumpetSound" src="trumpet_sound.mp3" preload="auto"></audio> 
+
+        <div class="container">
+            <div class="content">
+                <div class="birthday-sticker sticker-top-left"></div>
+                <div class="birthday-sticker sticker-top-right"></div>
+                <h1 class="title">Happy Birthday!</h1>
+                <p class="name">Shinta Wulansari</p>
+                <p class="message">Terima kasih sudah menjadi sosok yang luar biasa, yang selalu mendukungku dan membuatku menjadi pribadi yang lebih baik. Di usiamu yang ke 21 ini, semoga semua yang kamu impikan bisa terwujud. Selamat merayakan hari spesialmu  -By luky</p>
+            </div>
+            <div class="countdown-container">
+                <p>Menuju hari spesialmu:</p>
+                <div id="countdown" class="countdown"></div>
+            </div>
+        </div>
+        <div class="confetti-container"></div>
+        <div class="stars-container"></div>
+        <div class="decorations">
+            <div class="balloon balloon-1"></div>
+            <div class="balloon balloon-2"></div>
+            <div class="cake"></div>
+            <div class="present"></div>
+        </div>
+    </div>
+
+    <script>
+        const birthday = new Date("Sep 22, 2024 00:00:00").getTime();
+        const countdownElement = document.getElementById("countdown");
+        const startButton = document.getElementById("startButton");
+        const startScreen = document.getElementById("startScreen");
+        const mainContent = document.getElementById("mainContent");
+        const backgroundMusic = document.getElementById("backgroundMusic");
+        const trumpetSound = document.getElementById("trumpetSound");
+        const fireworksContainer = document.getElementById('fireworksContainer');
+        const sparklersContainer = document.getElementById('sparklersContainer');
+
+        backgroundMusic.volume = 0.5;
+
+        startButton.addEventListener('click', () => {
+          startScreen.style.display = "none";
+          mainContent.style.display = "flex";
+          backgroundMusic.play().catch(e => console.error("Background music playback failed:", e));
+          // Hentikan dan bersihkan efek awal
+          clearInterval(fireworkInterval);
+          clearInterval(sparklerInterval);
+          fireworksContainer.innerHTML = '';
+          sparklersContainer.innerHTML = '';
+        });
+
+        const countdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = birthday - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                countdownElement.innerHTML = `${days} hari ${hours} jam ${minutes} menit ${seconds} detik`;
+            } else {
+                clearInterval(countdownInterval);
+                countdownElement.innerHTML = "Selamat Ulang Tahun!";
+                showHappyBirthdayContent();
+                trumpetSound.play().catch(e => console.error("Trumpet sound playback failed:", e));
+            }
+        }, 1000);
+        
+        function showHappyBirthdayContent() {
+            const content = document.querySelector('.content');
+            content.style.animation = 'fadeIn 2s ease-in-out forwards';
+            document.querySelector('.countdown-container').style.display = 'none';
+            document.querySelectorAll('.decorations div').forEach(el => {
+                el.style.bottom = '10%';
+                el.style.animation = 'riseUp 15s linear forwards';
+                el.style.opacity = '1';
+            });
+            createConfetti();
+            createStars();
+        }
+
+        function createConfetti() {
+            const confettiContainer = document.querySelector('.confetti-container');
+            const colors = ['#e0e0e0', '#b0c4de', '#f0f8ff'];
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDelay = `-${Math.random() * 10}s`;
+                confettiContainer.appendChild(confetti);
+            }
+        }
+
+        function createStars() {
+            const starsContainer = document.querySelector('.stars-container');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.animationDelay = `-${Math.random() * 5}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        const fireworksColors = ['#ff6347', '#ffeb3b', '#66ff66', '#8a2be2', '#4169e1', '#f0f8ff'];
+
+        function createSparks(x, y) {
+            const numSparks = 50;
+            const color = fireworksColors[Math.floor(Math.random() * fireworksColors.length)];
+            for (let i = 0; i < numSparks; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'spark';
+                spark.style.backgroundColor = color;
+                spark.style.left = `${x}px`;
+                spark.style.top = `${y}px`;
+
+                const angle = Math.random() * 2 * Math.PI;
+                const distance = Math.random() * 50 + 50;
+                const endX = x + distance * Math.cos(angle);
+                const endY = y + distance * Math.sin(angle);
+
+                spark.style.setProperty('--x-dir', `${endX - x}px`);
+                spark.style.setProperty('--y-dir', `${endY - y}px`);
+                
+                fireworksContainer.appendChild(spark);
+
+                spark.addEventListener('animationend', () => {
+                    spark.remove();
+                });
+            }
+        }
+
+        function launchFirework() {
+            const startX = Math.random() * window.innerWidth;
+            const endY = Math.random() * (window.innerHeight / 2) + 50;
+            const endX = Math.random() * window.innerWidth;
+
+            const rocket = document.createElement('div');
+            rocket.className = 'rocket';
+            rocket.style.left = `${startX}px`;
+            rocket.style.setProperty('--y-pos', `-${window.innerHeight - endY}px`);
+
+            fireworksContainer.appendChild(rocket);
+
+            rocket.addEventListener('animationend', () => {
+                rocket.remove();
+                createSparks(endX, endY);
+            });
+        }
+        
+        function createSparkler() {
+            const sparkler = document.createElement('div');
+            sparkler.className = 'sparkler';
+            sparkler.style.left = `${Math.random() * 100}vw`;
+            sparklersContainer.appendChild(sparkler);
+
+            setTimeout(() => {
+                sparkler.remove();
+            }, 3000);
+        }
+
+        let fireworkInterval = null;
+        let sparklerInterval = null;
+
+        function startFireworksAndSparklers() {
+            fireworkInterval = setInterval(() => {
+                const numFireworks = Math.floor(Math.random() * 3) + 1;
+                for (let i = 0; i < numFireworks; i++) {
+                    launchFirework();
+                }
+            }, 500);
+
+            sparklerInterval = setInterval(createSparkler, 200);
+        }
+        
+        startFireworksAndSparklers();
+
+    </script>
+</body>
+</html>
